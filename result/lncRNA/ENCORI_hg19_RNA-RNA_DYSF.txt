@@ -1,0 +1,17 @@
+#please cite:
+#Zhou KR, Liu S, Cai L, et al. ENCORI: The Encyclopedia of RNA Interactomes.
+#2.Li JH, et al.starBase v2.0: decoding miRNA-ceRNA, miRNA-ncRNA and protein-RNA interaction networks from large-scale CLIP-Seq data , Nucleic Acids Res. 2014 Jan;42:D92-7.
+geneID	geneName	geneType	pairGeneID	pairGeneName	pairGeneType	interactionNum	expNum	seqTypeNum	totalReadsNum	FreeEnergy	AlignScore(Smith-Waterman)
+ENSG00000135636	DYSF	protein_coding	ENSG00000092439	TRPM7	protein_coding	1	1	1	1	-16.50	25.00
+ENSG00000135636	DYSF	protein_coding	ENSG00000099956	SMARCB1	protein_coding	1	1	1	1	-53.00	34.00
+ENSG00000135636	DYSF	protein_coding	ENSG00000063978	RNF4	protein_coding	1	1	1	1	-28.30	18.00
+ENSG00000135636	DYSF	protein_coding	ENSG00000105640	RPL18A	protein_coding	1	1	1	1	-10.60	12.00
+ENSG00000135636	DYSF	protein_coding	ENSG00000122406	RPL5	protein_coding	1	1	1	2	-26.50	18.00
+ENSG00000135636	DYSF	protein_coding	ENSG00000185479	KRT6B	protein_coding	1	1	1	2	-20.10	16.00
+ENSG00000135636	DYSF	protein_coding	ENSG00000228335	AC073063.1	processed_pseudogene	1	1	1	2	-34.90	17.00
+ENSG00000135636	DYSF	protein_coding	ENSG00000234524	RPL12P43	processed_pseudogene	1	1	1	1	-31.90	15.50
+ENSG00000135636	DYSF	protein_coding	ENSG00000243859	RPL5P17	processed_pseudogene	1	1	1	1	-30.30	24.00
+ENSG00000135636	DYSF	protein_coding	ENSG00000152578	GRIA4	protein_coding	1	1	1	1	-5.27	14.00
+ENSG00000135636	DYSF	protein_coding	ENSG00000162704	ARPC5	protein_coding	1	1	1	1	-44.70	35.00
+ENSG00000135636	DYSF	protein_coding	ENSG00000198668	CALM1	protein_coding	1	1	1	1	-54.50	41.50
+ENSG00000135636	DYSF	protein_coding	ENSG00000204386	NEU1	protein_coding	1	1	1	1	-39.70	19.50
