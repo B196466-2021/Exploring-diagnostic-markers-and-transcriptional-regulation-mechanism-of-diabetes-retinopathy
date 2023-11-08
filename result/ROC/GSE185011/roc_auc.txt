@@ -1,0 +1,3 @@
+id	AUC
+DYSF	0.76
+LTF	0.76
