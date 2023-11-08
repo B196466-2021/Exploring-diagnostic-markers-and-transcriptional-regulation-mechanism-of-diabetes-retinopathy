@@ -1,60 +1,5 @@
 #! /usr/bin/Rscript
 
-usage<-function(){
-	cat("This script is used for co_expression analysis with WGCNA.\n",
-getopt(spec,usage=TRUE),
-"Options:
-	-e, --exp	expression file.
-			ID	sample1	sample2	sample3	...
-			gene1	31	37	31	...
-			gene2	23	34	65	...
-	-p, --phen	phenotype or clinical traits file (1 is the trait, 0 is not the trait).
-			Sanple	status
-			sample1	1
-			sample2	1
-			sample3	0
-	-r, --corr	correlation threshold, must be -1 ~ 1 (default 0.8).
-	-c, --count	gene count selected (default 5000 genes of SD).
-	-n, --norm	normalize or not by limma (default FALSE).
-	-t, --thr	thread will be used (at least 2, default 2).
-	-o, --out	out directory (default ./).
-	-v, --version	display version information.
-	-h, --help	display this help and exit.
-	\n",sep=" ")
-	q(status=1)
-}
-
-##########################
-#get options
-
-library(getopt)
-spec = matrix(c(
-'exp','e',1,'character',
-'phen','p',1,'character',
-'corr','r',1,'double',
-'thr','t',1,'integer',
-'count','c',1,'integer',
-'norm','n',0,'logical',
-'out','o',1,'character',
-'version','v',0,'logical',
-'help','h',0,'logical'
-),byrow=TRUE, ncol=4)
-
-opt=getopt(spec)
-
-if (!is.null(opt$version)) {version()}
-if (is.null(opt$exp) || is.null(opt$phen) || !is.null(opt$help)) {usage()}
-
-if (is.null(opt$corr)) {opt$corr=0.8}
-if (is.null(opt$thr)) {opt$thr=2}
-if (is.null(opt$out)) {opt$out='./'}
-if (is.null(opt$count)) {opt$count=5000}
-if (is.null(opt$norm)) {opt$norm=FALSE}
-dir <- gsub("[^/]*$", '', opt$out, perl=T)
-if(! dir.exists(dir) && dir != ''){
-	dir.create(dir, recursive=T)
-}
-
 ##########################
 #main programe
 library(limma)
@@ -62,10 +7,6 @@ library(WGCNA)
 library(ggplot2)
 library(cowplot)
 library(psych)
-options(stringsAsFactors = FALSE)
-enableWGCNAThreads(opt$thr)
-source('/home/dev/DEV-wangdh/R/labeledHeatmap.R')
-source('/home/dev/DEV-wangdh/R/heatmapWithLegend.R')
 
 ## Loading datas
 exp<-read.table(opt$exp, header=T, sep='\t', check.names=F, stringsAsFactors=F)

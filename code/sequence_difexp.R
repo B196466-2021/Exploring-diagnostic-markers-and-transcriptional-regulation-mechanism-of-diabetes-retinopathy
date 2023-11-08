@@ -1,48 +1,5 @@
 #! /usr/bin/Rscript
-usage<-function(){
-	cat("This script is used for differential expression analysis of circleRNA.\n",
-getopt(spec,usage=TRUE),
-"Options:
-	-f, --file	file containing count of all samples.
-	-p, --pheno	group information file.
-	-c, --comp	compare information file.
-	-t, --type	the expression data type (counts, FPKM, RPKM)
-	-m, --cpm	the minimum value of cpm for filter(default 10).
-	-o, --out	output directory(default ./).
-	-v, --version	display version information.
-	-h, --help	display this help and exit.
-	\n",sep=" ")
-	q(status=1)
-}
 
-##########################
-#get options
-
-library(getopt)
-spec = matrix(c(
-'file','f',1,'character',
-'pheno','p',1,'character',
-'comp','c',1,'character',
-'type','t',1,'character',
-'circRNA','r',0,'logical',
-'cpm','m',1,'double',
-'out','o',1,'character',
-'version','v',0,'logical',
-'help','h',0,'logical'
-),byrow=TRUE, ncol=4)
-
-opt=getopt(spec)
-
-if (!is.null(opt$version)) {version()}
-if (is.null(opt$file) || is.null(opt$pheno) || is.null(opt$comp) || !is.null(opt$help)) {usage()}
-
-if (is.null(opt$type)) {stop('You must provide the data type by -t or --type.')}
-if (is.null(opt$cpm)) {opt$cpm=10}
-if (is.null(opt$out)) {opt$out="./"}
-
-if(! dir.exists(opt$out)){
-	dir.create(opt$out, recursive=T)
-}
 ##########################
 #main programe
 

@@ -1,42 +1,5 @@
 #! /usr/bin/Rscript
 
-usage<-function(){
-	cat("This script is used to annotate array data from GEO, which have the same platform\n",
-getopt(spec,usage=TRUE),
-"Options:
-	-f, --file	data file(s) (file1,file2,...).
-	-a, --anno	annotation information file.
-	-u, --ugn	output unique processed gene names or not (default FALSE).
-	-l, --log	translate data to log2(exp) or not (default FALSE).
-	-o, --out	out file.
-	-v, --version	display version information.
-	-h, --help	display this help and exit.
-	\n",sep=" ")
-	q(status=1)
-}
-
-##########################
-#get options
-
-library(getopt)
-spec = matrix(c(
-'file','f',1,'character',
-'anno','a',1,'character',
-'ugn','u',2,'logical',
-'log','l',2,'logical',
-'out','o',1,'character',
-'version','v',0,'logical',
-'help','h',0,'logical'
-),byrow=TRUE, ncol=4)
-
-opt=getopt(spec)
-
-if (!is.null(opt$version)) {version()}
-if (is.null(opt$file) || is.null(opt$out) || !is.null(opt$help)) {usage()}
-
-if (is.null(opt$ugn)) {opt$ugn=F}
-if (is.null(opt$log)) {opt$log=F}
-
 ##########################
 #main programe
 

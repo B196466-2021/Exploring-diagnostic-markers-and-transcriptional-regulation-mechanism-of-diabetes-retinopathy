@@ -1,39 +1,5 @@
 #! /usr/bin/Rscript
 
-usage<-function(){
-	cat("This script is used to\n",
-getopt(spec,usage=TRUE),
-"Options:
-	-f, --file	list files (file1,file2,.. up to 7 sets).
-	-n, --name	name for each list file (name1,name2,..)
-	-p, --pos	postion of labels (0 ~ 360, e.g. 0,0 0,0,180)
-	-c, --color	colors (e.g. red,green,... defaul trainbow).
-	-o, --out	prefix of out files (default ./).
-	-v, --version	display version information.
-	-h, --help	display this help and exit.
-	\n",sep=" ")
-	q(status=1)
-}
-
-##########################
-#get options
-
-library(getopt)
-spec = matrix(c(
-'file','f',1,'character',
-'name','n',1,'character',
-'pos','p',1,'character',
-'color','c',1,'character',
-'out','o',1,'character',
-'version','v',0,'logical',
-'help','h',0,'logical'
-),byrow=TRUE, ncol=4)
-
-opt=getopt(spec)
-
-if (!is.null(opt$version)) {version()}
-if (is.null(opt$file) || !is.null(opt$help)) {usage()}
-if (is.null(opt$out)) {opt$out='./'}
 ##########################
 #main programe
 library(VennDiagram)

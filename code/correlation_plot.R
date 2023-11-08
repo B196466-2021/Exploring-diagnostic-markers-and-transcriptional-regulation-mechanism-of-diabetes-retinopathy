@@ -1,82 +1,10 @@
 #! /usr/bin/Rscript
 
-usage<-function(spec){
-	cat("This script is used to calculate correlation and plot heatmap\n",
-getopt(spec,usage=TRUE),
-"Options:
-	-x, --f1	table 1 with column name and row name (column name is necessary).
-	-y, --f2	optional table 2 with the same number of rows as table 1.
-	-n, --name	show column name of table(s) or not (default not show).
-	-p, --pval	show p values in the cells or not (default not show).
-	-c, --color	colors will be used (default blue,white,red).
-	-w, --width	the width of plot (default 7 inch).
-	-e, --height	the height of plot (default 7 inch).
-	-t, --thread	thread number (default 1).
-	-o, --out	prefix of out files (default ./).
-	-v, --version	display version information.
-	-h, --help	display this help and exit.
-	\n",sep=" ")
-	q(status=1)
-}
-
-##########################
-#get options
-library(getopt)
-spec = matrix(c(
-	'f1','x',1,'character',
-	'f2','y',1,'character',
-	'pval','p',2,'logical',
-	'name','n',2,'logical',
-	'color','c',1,'character',
-	'width','w',1,'double',
-	'height','e',1,'double',
-	'thread','t',1,'integer',
-	'out','o',1,'character',
-	'version','v',0,'logical',
-	'help','h',0,'logical'
-	),byrow=TRUE, ncol=4)
-
-opt=getopt(spec)
-
-if (!is.null(opt$version)) {version()}
-if (is.null(opt$out)) {opt$out='./'}
-if (is.null(opt$f1) || !is.null(opt$help)) {usage(spec)}
-if (is.null(opt$color)) {opt$color='blue,white,red'}
-
-if (is.null(opt$pval) || opt$pval==FALSE){
-	opt$pval=FALSE
-}else{
-	opt$pval=TRUE
-}
-if (is.null(opt$name) || opt$name==FALSE){
-	opt$name=FALSE
-}else{
-	opt$name=TRUE
-}
-if (is.null(opt$width)) {opt$width=7}
-if (is.null(opt$height)) {opt$height=7}
-if (is.null(opt$thread)) {opt$thread=1}
-
-dir <- gsub("[^/]*$", '', opt$out, perl=T)
-if(! dir.exists(dir) && dir != ''){
-	dir.create(dir, recursive=T)
-}
-##########################
-#define functions
-
-mcot<-function(x, da1, da2){
-	f2 <- data.frame(da2[, x])
-	names(f2) <- x
-	core <- corr.test(da1, f2, adjust='none')
-	return(core)
-}
-
 ##########################
 #main programe
 library(psych)
 library(ggplot2)
 library(parallel)
-source('/home/dev/DEV-wangdh/R/single_gene_cancer.R')
 f1 <- read.table(opt$f1, header=T, sep='\t', stringsAsFactors=F, check.names=F)
 if(!class(f1[, 1]) %in% c('numeric', 'integer')){
 	rownm <- f1[, 1]

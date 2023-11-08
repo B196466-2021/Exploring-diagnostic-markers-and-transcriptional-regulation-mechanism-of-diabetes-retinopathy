@@ -1,57 +1,5 @@
 #! /usr/bin/Rscript
 
-usage<-function(spec){
-	cat("This script is used to estimate immune infiltration with ssGSEA method\n",
-getopt(spec,usage=TRUE),
-"Options:
-	-e, --exp	expression file with non-negative data (counts or log2 transformed normalized expression).
-	-d, --db	database dataset (immune cell<tab>NA<table>gene1<table>gene2...).
-	-p, --pheno	group information file of samples.
-	-m, --method	gsva method gsva/ssgsea/zscore/plage (default ssgsea).
-	-l, --log2	convert expression value by log2(x+1) or not (default FALSE).
-	-t, --thread	threads number (default 5)
-	-o, --out	output directory (deafault ./).
-	-v, --version	display version information.
-	-h, --help	display this help and exit.
-	\n",sep=" ")
-	q(status=1)
-}
-
-##########################
-#get options
-library(getopt)
-spec = matrix(c(
-	'exp','e',1,'character',
-	'db','d',1,'character',
-	'pheno','p',1,'character',
-	'thread','t',1,'integer',
-	'method','m',1,'character',
-	'log2','l',2,'logical',
-	'out','o',1,'character',
-	'version','v',0,'logical',
-	'help','h',0,'logical'
-	),byrow=TRUE, ncol=4)
-
-opt=getopt(spec)
-
-if (!is.null(opt$version)) {version()}
-if (is.null(opt$exp) || is.null(opt$db) || !is.null(opt$help)) {usage(spec)}
-
-if (is.null(opt$out)) {opt$out='./'}
-if (is.null(opt$thread)) {opt$thread=5}
-if (is.null(opt$method)) {opt$method='ssgsea'}
-if (is.null(opt$log2)) {opt$log2=F}
-dir <- gsub("[^/]*$", '', opt$out, perl=T)
-if(! dir.exists(dir) && dir != ''){
-	dir.create(dir, recursive=T)
-}
-##########################
-#define functions
-
-my_fun<-function(){
-
-}
-
 ##########################
 #main programe
 library(genefilter)

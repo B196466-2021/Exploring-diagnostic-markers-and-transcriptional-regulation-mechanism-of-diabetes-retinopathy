@@ -1,57 +1,6 @@
 #! /usr/bin/Rscript
 
 ##########################
-#get options
-
-library(getopt)
-opt = getopt(matrix(c(
-'dir','d',1,'character',
-'comp','c',1,'character',
-'type','t',1,'character',
-'color','r',1,'character',
-'lid','i',1,'character',
-'pval','l',1,'double',
-'qval','q',1,'double',
-'fold','f',1,'double',
-'xlab','x',1,'character',
-'ylim','y',1,'double',
-'out','o',1,'character',
-'version','v',0,'logical',
-'help','h',0,'logical'
-),byrow=TRUE, ncol=4));
-
-usage<-function(){
-	cat("This script is used to plot differential expression.
-Usage   Rscript",get_Rscript_filename(),"[options]
-Options:
-	-d, --dir	directory congtaining all differential result file of each compare, or differential result file of one compare.
-	-c, --comp	file contain all compare informations.
-	-r, --color	color for up and down regulating(default brown3,blue3).
-	-i, --lid	list file of id or the number of column will be displayed as text.
-	-l, --pval	threshold value of p_value (defult 0.05).
-	-q, --qval	threshold value of q_value.
-	-f, --fold	the fold of up and down regulate(defult 1.5).
-	-x, --xlab	the label of x for vocano plot (defult log2(Fold Change)).
-	-o, --out	output directory(default the program runing directory).
-	-y, --ylim	limit of y axis for volcano plot (default max vlaue).
-	-v, --version	display version informations.
-	-h, --help	display this help and exit.
-	\n",sep=" ")
-	q(status=1);
-}
-
-if (!is.null(opt$version)) {stop(version())}
-if (is.null(opt$dir) || !is.null(opt$help)){
-	stop(usage())
-}
-
-if (is.null(opt$type)) {opt$type="protein_coding"}
-if (is.null(opt$col)) {opt$col="brown3,blue3"}
-if (is.null(opt$out)) {opt$out="."}
-if (is.null(opt$pval)) {opt$pval=0.05}
-if (is.null(opt$fold)) {opt$fold=1.5}
-if (is.null(opt$xlab)) {opt$xlab='log2(Fold Change)'}
-##########################
 #subfunctions
 scatter<-function(x,test=1,control=2,times=1.5,xlab="control",ylab="test",labe=NULL,log2FC=4){
 	if(max(data.frame(x[,control],x[,test]))>25){

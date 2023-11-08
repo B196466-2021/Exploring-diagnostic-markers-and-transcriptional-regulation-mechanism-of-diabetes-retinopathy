@@ -1,47 +1,4 @@
 #! /usr/bin/Rscript
-
-usage<-function(){
-	cat("This script is used for differential expression analysis of array data in GEO\n",
-getopt(spec,usage=TRUE),
-"Options:
-	-d, --data	data matrx (data1,data2,..).
-	-p, --phen	phenotype file containing all group informations.
-	-c, --comp	compare informations file.
-	-o, --out	out directory (default ./).
-	-l, --logt	the data have translated by log2 or not (default not translated).
-	-t, --type	data type: arry, RNA-seq (default arry).
-	-n, --norm	normalize or not (default FALSE).
-	-v, --version	display version information.
-	-h, --help	display this help and exit.
-	\n",sep=" ")
-	q(status=1)
-}
-
-##########################
-#get options
-
-library(getopt)
-spec = matrix(c(
-'data','d',1,'character',
-'phen','p',1,'character',
-'comp','c',1,'character',
-'type','t',1,'character',
-'out','o',1,'character',
-'logt','l',0,'logical',
-'norm','n',2,'logical',
-'version','v',0,'logical',
-'help','h',0,'logical'
-),byrow=TRUE, ncol=4)
-
-opt=getopt(spec)
-
-if (!is.null(opt$version)) {version()}
-if (is.null(opt$data) || is.null(opt$phen) || is.null(opt$comp) || !is.null(opt$help)) {usage()}
-
-if (is.null(opt$logt)) {opt$logt=F}
-if (is.null(opt$out)) {opt$out='./'}
-if (is.null(opt$norm)) {opt$norm=F}
-if (is.null(opt$type)) {opt$type='arry'}
 ##########################
 #main programe
 library(foreach)

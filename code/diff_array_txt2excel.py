@@ -5,42 +5,6 @@
 
 import sys, getopt
 import os
-###########################
-#sub functions
-
-def usage():
-	print('''This script is used to transform differential results of array to excell.
-Usage	python '''+sys.argv[0]+''' [options]
-Options:
-	-d --dir	directory containing all differential results of each compare.
-	-c --comp	compare information file
-	-o --output	output directory.
-	-v --version	display version information.
-	-h --help	display the usage.\n''')
-	sys.exit()
-
-#########################
-#get options
-
-opts, args = getopt.getopt(sys.argv[1:], "hi:d:c:o:v", ["help", "dir=", "comp=", "output=", "version"])
-
-output = "./"
-
-for op, value in opts:
-	if op in ("-d", "--dir"):
-		dire = value
-	elif op in ("-c", "--comp"):
-		comp = os.path.abspath(value)
-	elif op in ("-o", "--output"):
-		output = value
-	elif op in ("-v", "--version"):
-		version()
-	elif op in ("-h", "--help"):
-		usage()
-
-if not ('dire' in dir() and 'comp' in dir()):
-	usage()
-	sys.exit()
 
 #########################
 #main programe
