@@ -14,7 +14,7 @@
 
 ![lass](pic/lass.png)
 
-![diff](pic/diff.png)
+![diff](pic/diffpng.png)
 
 # 3.Exploring regulatory mechanism of target genes and their performance as diagnostic markers
 
