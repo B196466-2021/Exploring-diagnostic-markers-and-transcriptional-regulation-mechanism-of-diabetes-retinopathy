@@ -1,0 +1,7 @@
+Module	Gene_counts
+blue	599
+brown	245
+green	112
+red	64
+turquoise	3749
+yellow	231
